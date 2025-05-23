@@ -12,13 +12,16 @@ class FrameGenerator:
         self.current_frame = 0
         self.is_playing = False
         self.fig.canvas.mpl_connect('key_press_event', self.update)
-        self.animation = FuncAnimation(self.fig,self.play,frames=self.frame_generator(),interval=100,repeat=False)
+        self.animation = FuncAnimation(self.fig,self.play,frames=self.frame_generator(),interval=120,repeat=False)
 
     def frame_generator(self):
         while True:
             yield self.current_frame
             if self.is_playing:
-                self.current_frame  = (self.current_frame+1)%len(self.frames)
+                self.current_frame  = (self.current_frame+1)
+                if(self.current_frame>len(self.frames)):
+                     self.is_playing = False
+                
 
     def update(self,event):
             if event.key == "right":
@@ -49,7 +52,7 @@ class FrameGenerator:
 from Algorithms_visuialize import Algorithms
 data = [225, 42, 345, 103, 490, 273, 100, 469, 188, 7, 150, 420, 98, 260, 119, 363, 198, 287, 8, 364]
 a = Algorithms(data)
-snaps = a.get_snaps(a.bubble_sort)
+snaps = a.get_snaps(a.merge_sort)
 
 b = FrameGenerator(data,snaps)
 

@@ -28,21 +28,58 @@ class Algorithms:
         yield self.array.copy()  # Yield final state
         self.reset_array()
 
-
-
     def selection_sort(self):
         for i in range(0,len(self.array)):
             min_indx = i
-            for j in range(min_indx+1,self.array):
+            for j in range(min_indx+1,len(self.array)):
                 if self.array[j] < self.array[min_indx]:
                     min_indx =  j
             self.array[i],self.array[min_indx] = self.array[min_indx],self.array[i]
+            yield self.array.copy()
+        yield self.array.copy()
 
     def insertion_sort(self):
-        pass
-        
+        for i in range(1,len(self.array)):
+            key = self.array[i]
+            j = i-1
+            while(j>=0 and key < self.array[j]):
+                self.array[j+1] = self.array[j]
+                j = j-1
+                yield self.array.copy()
+            self.array[j+1] = key
+            yield self.array.copy()
     def merge_sort(self):
-        pass
+        def merge_sort_recursive(arr, left, right):
+            if right - left > 1:
+                mid = (left + right) // 2
+                yield from merge_sort_recursive(arr, left, mid)
+                yield from merge_sort_recursive(arr, mid, right)
+                yield from merge(arr, left, mid, right)
+
+        def merge(arr, left, mid, right):
+            merged = []
+            i, j = left, mid
+            while i < mid and j < right:
+                if arr[i] <= arr[j]:
+                    merged.append(arr[i])
+                    i += 1
+                else:
+                    merged.append(arr[j])
+                    j += 1
+            while i < mid:
+                merged.append(arr[i])
+                i += 1
+            while j < right:
+                merged.append(arr[j])
+                j += 1
+            for k in range(left, right):
+                arr[k] = merged[k - left]
+                yield arr.copy()
+
+        yield from merge_sort_recursive(self.array, 0, len(self.array))
+        yield self.array.copy()
+        self.reset_array()
+
     
     def quick_sort(self):
         pass
