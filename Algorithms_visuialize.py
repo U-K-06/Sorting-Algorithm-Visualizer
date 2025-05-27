@@ -1,15 +1,7 @@
-from random import shuffle,randint
-from time import sleep
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
 class Algorithms:
     def __init__(self, array: list[int]):
         self.array = array
         self.copy = array.copy()
-
-    def shuffle_array(self):
-        if self.shuffling:
-            shuffle(self.array)
 
     def reset_array(self):
         self.array = self.copy.copy()
@@ -48,6 +40,8 @@ class Algorithms:
                 yield self.array.copy()
             self.array[j+1] = key
             yield self.array.copy()
+
+
     def merge_sort(self):
         def merge_sort_recursive(arr, left, right):
             if right - left > 1:
@@ -83,6 +77,8 @@ class Algorithms:
     
     def quick_sort(self):
         pass
+
+    
     def get_snaps(self,algo):
         return list(algo())
 
