@@ -26,4 +26,7 @@ Sorting Algorithm Visualizers is python program that visualizes various sorting 
 screenshots and demo videos can be found in the `assets` directory.
 [![Screenshot](assets/1.png)]
 [![Screenshot](assets/2.png)]
-[![Demo Video](assets/3.mp4)]
+<video width="600" controls>
+  <source src="assets/3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
